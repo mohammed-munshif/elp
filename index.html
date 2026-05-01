@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitty Lilyy ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* =============================================
+       KITTY LILYY — Romantic Love Page Styles
+       ============================================= */
+    :root {
+      --pink:       #f9a8d4;
+      --rose:       #fb7185;
+      --deep-rose:  #e11d48;
+      --lavender:   #ddd6fe;
+      --lilac:      #c4b5fd;
+      --white:      #fff8f8;
+      --cream:      #fdf2f8;
+      --blush:      #fce7f3;
+      --text-dark:  #4a1942;
+      --text-mid:   #7c3d6e;
+      --text-light: #c084a0;
+      --page-bg:    #fffaf9;
+      --page-edge:  #f3c6d5;
+      --font-display: 'Great Vibes', cursive;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body:    'Cormorant Garamond', Georgia, serif;
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+      background: #fce4ec;
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Background */
+    .bg-gradient {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, #ffd6e8 0%, transparent 60%),
+        radial-gradient(ellipse 60% 70% at 80% 90%, #e8d5f5 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, #fff0f6 0%, #f8d7e8 100%);
+      animation: bgShift 12s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift {
+      0%   { filter: hue-rotate(0deg) brightness(1); }
+      50%  { filter: hue-rotate(8deg) brightness(1.03); }
+      100% { filter: hue-rotate(-5deg) brightness(0.98); }
+    }
+
+    .glow-orb {
+      position: fixed; border-radius: 50%; filter: blur(80px);
+      opacity: 0.5; z-index: 0; pointer-events: none;
+      animation: orbFloat 10s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 400px; height: 400px; background: radial-gradient(#f9a8d4, transparent); top: -100px; left: -100px; }
+    .orb2 { width: 350px; height: 350px; background: radial-gradient(#ddd6fe, transparent); bottom: -80px; right: -80px; animation-delay: -4s; }
+    .orb3 { width: 300px; height: 300px; background: radial-gradient(#fca5a5, transparent); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -7s; }
+    @keyframes orbFloat {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(20px,-30px) scale(1.1); }
+    }
+
+    .noise-overlay {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    #particleCanvas { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+
+    /* Music Button */
+    .music-btn {
+      position: fixed; top: 18px; right: 18px; z-index: 100;
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 18px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(249,168,212,0.6);
+      border-radius: 30px;
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--text-mid); cursor: pointer;
+      transition: all 0.3s var(--ease-smooth);
+      box-shadow: 0 4px 20px rgba(249,168,212,0.3);
+    }
+    .music-btn:hover { background: rgba(255,255,255,0.85); box-shadow: 0 6px 28px rgba(249,168,212,0.5); transform: translateY(-2px); }
+    .music-btn.playing .music-icon { display: inline-block; animation: spinNote 1s linear infinite; }
+    @keyframes spinNote { to { transform: rotate(360deg); } }
+
+    /* Landing */
+    .landing {
+      position: relative; z-index: 10;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; overflow: hidden;
+    }
+    .landing-content {
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      animation: landingIn 1.2s var(--ease-bounce) both;
+    }
+    @keyframes landingIn { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+    .crown-deco { font-size: 1.1rem; letter-spacing: 12px; color: var(--lilac); opacity: 0.8; animation: fadeInUp 1s 0.3s both; }
+
+    .main-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem,15vw,9rem); line-height: 1.1;
+      color: transparent;
+      background: linear-gradient(135deg, #e11d48, #f472b6, #c084fc, #f9a8d4);
+      -webkit-background-clip: text; background-clip: text;
+      cursor: pointer;
+      filter: drop-shadow(0 4px 20px rgba(225,29,72,0.25));
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      transition: transform 0.4s var(--ease-smooth), filter 0.4s;
+      user-select: none;
+    }
+    .main-title:hover { filter: drop-shadow(0 6px 30px rgba(225,29,72,0.5)); transform: scale(1.04); }
+    @keyframes titleGlow {
+      from { filter: drop-shadow(0 4px 20px rgba(225,29,72,0.25)); }
+      to   { filter: drop-shadow(0 6px 35px rgba(249,168,212,0.6)); }
+    }
+    .title-word { display: inline-block; }
+
+    .subtitle {
+      font-family: var(--font-heading); font-style: italic;
+      font-size: clamp(0.9rem,2.5vw,1.1rem);
+      color: var(--text-light); letter-spacing: 0.03em;
+      animation: fadeInUp 1s 0.6s both;
+    }
+
+    .heart-pulse-row { display: flex; gap: 16px; font-size: 1.6rem; animation: fadeInUp 1s 0.8s both; }
+    .pulse-heart { display: inline-block; animation: heartbeat 1.4s ease-in-out infinite; }
+    .delay1 { animation-delay: 0.3s; }
+    .delay2 { animation-delay: 0.6s; }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      14%      { transform: scale(1.25); }
+      28%      { transform: scale(1); }
+      42%      { transform: scale(1.15); }
+    }
+
+    .open-book-btn {
+      margin-top: 10px;
+      background: linear-gradient(135deg,#fb7185,#f472b6,#c084fc);
+      border: none; border-radius: 50px; padding: 0; cursor: pointer;
+      box-shadow: 0 8px 30px rgba(251,113,133,0.4);
+      transition: all 0.35s var(--ease-smooth);
+      animation: fadeInUp 1s 1s both;
+    }
+    .open-book-btn:hover { box-shadow: 0 12px 40px rgba(251,113,133,0.6); transform: translateY(-3px) scale(1.04); }
+    .open-book-btn:active { transform: scale(0.97); }
+    .btn-inner {
+      display: block; padding: 14px 36px;
+      font-family: var(--font-heading); font-size: 1.05rem; font-weight: 400;
+      letter-spacing: 0.08em; color: #fff;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    }
+
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+    .float-deco {
+      position: absolute; font-size: 2rem;
+      animation: floatLoop 6s ease-in-out infinite;
+      opacity: 0.8; pointer-events: none; z-index: 3;
+    }
+    .teddy     { top:10%; left:5%;    font-size:2.5rem; animation-duration:7s; }
+    .rose      { top:20%; right:8%;   font-size:2rem;   animation-delay:-1s; }
+    .star1     { top:60%; left:3%;    font-size:1.8rem; animation-delay:-2s; animation-duration:5s; }
+    .cloud     { bottom:20%; right:5%; font-size:2.2rem; animation-delay:-3s; animation-duration:8s; }
+    .rose2     { bottom:15%; left:10%; font-size:2rem;   animation-delay:-1.5s; }
+    .star2     { top:40%; right:4%;   font-size:1.5rem; animation-delay:-4s; animation-duration:6s; }
+    .butterfly { top:30%; left:50%;   font-size:1.8rem; animation-delay:-2.5s; }
+    .tulip     { bottom:30%; right:12%; font-size:2rem; animation-delay:-0.5s; animation-duration:7.5s; }
+    @keyframes floatLoop {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-22px) rotate(3deg); }
+    }
+
+    /* ============ BOOK OVERLAY ============ */
+    .book-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(60,10,40,0.6);
+      backdrop-filter: blur(8px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+      padding: 20px;
+    }
+    .book-overlay.open { opacity: 1; pointer-events: all; }
+
+    .book-scene {
+      perspective: 1800px;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+      width: 100%; max-width: 860px;
+    }
+
+    .book {
+      position: relative;
+      width: 100%; max-width: 780px;
+      height: clamp(380px,55vw,500px);
+      transform-style: preserve-3d;
+    }
+
+    .book-cover-wrap {
+      position: absolute; inset: 0;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 1.1s cubic-bezier(0.645,0.045,0.355,1);
+      z-index: 10;
+    }
+    .book-cover-wrap.back { z-index: 1; }
+    .book-cover-wrap.open-cover { transform: rotateY(-165deg); }
+
+    .cover-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      border-radius: 6px 14px 14px 6px;
+    }
+    .front-face {
+      background: linear-gradient(145deg,#c2185b,#e91e8c,#9c27b0,#7b1fa2);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 6px 0 20px rgba(0,0,0,0.3), inset -3px 0 8px rgba(0,0,0,0.2);
+    }
+    .back-face {
+      background: linear-gradient(145deg,#880e4f,#6a1b9a);
+      transform: rotateY(180deg);
+      border-radius: 14px 6px 6px 14px;
+    }
+
+    .cover-content {
+      text-align: center; color: #fff; padding: 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .cover-ornament { font-size: 1.8rem; opacity: 0.8; }
+    .cover-ornament.flip { transform: rotate(180deg); }
+    .cover-title { font-family: var(--font-display); font-size: clamp(2rem,6vw,3.5rem); text-shadow: 0 2px 12px rgba(0,0,0,0.3); line-height: 1.1; }
+    .cover-heart-big { font-size: clamp(2.5rem,6vw,4rem); animation: heartbeat 1.4s ease-in-out infinite; }
+    .cover-sub { font-family: var(--font-heading); font-style: italic; font-size: clamp(0.75rem,2vw,1rem); opacity: 0.85; }
+
+    .pages-stack {
+      position: absolute; inset: 0;
+      border-radius: 6px 14px 14px 6px;
+      background: #fff5f5;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+    }
+
+    .page-sheet {
+      position: absolute; inset: 0;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 1s cubic-bezier(0.645,0.045,0.355,1);
+      z-index: 5;
+    }
+    .page-sheet.flipped { transform: rotateY(-180deg); }
+
+    .sheet-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      padding: clamp(20px,4vw,40px);
+      background: var(--page-bg);
+      overflow-y: auto;
+      border-radius: inherit;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .sheet-face.recto { border-right: 1px solid var(--page-edge); }
+    .sheet-face.verso { transform: rotateY(180deg); background: #fffbf9; border-left: 1px solid var(--page-edge); }
+
+    .page-ornament { text-align: center; color: var(--lilac); font-size: 0.9rem; letter-spacing: 8px; }
+    .page-chapter { font-family: var(--font-display); font-size: clamp(1.2rem,3.5vw,2rem); color: var(--rose); text-align: center; line-height: 1; }
+    .page-title { font-family: var(--font-heading); font-size: clamp(0.9rem,2.5vw,1.25rem); font-weight: 400; font-style: italic; color: var(--text-mid); text-align: center; }
+    .page-divider { text-align: center; color: var(--pink); letter-spacing: 6px; font-size: 0.85rem; }
+    .page-quote { font-family: var(--font-heading); font-style: italic; font-size: clamp(0.9rem,2.2vw,1.05rem); color: var(--deep-rose); border-left: 3px solid var(--pink); padding-left: 12px; line-height: 1.7; }
+    .page-body { font-size: clamp(0.82rem,2vw,0.97rem); color: var(--text-dark); line-height: 1.85; }
+    .page-deco { text-align: center; font-size: 1.5rem; margin-top: auto; }
+    .page-num-label { position: absolute; bottom: 12px; right: 18px; font-family: var(--font-heading); font-size: 0.75rem; color: var(--text-light); font-style: italic; }
+
+    .verso-illo { display: flex; align-items: center; justify-content: center; min-height: 130px; }
+    .big-heart-wrap { position: relative; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; }
+    .big-heart { font-size: 3.5rem; animation: heartbeat 1.4s ease-in-out infinite; }
+    .orbit-h { position: absolute; font-size: 1.3rem; animation: orbitSpin 4s linear infinite; }
+    .oh1 { animation-delay: 0s; }
+    .oh2 { animation-delay: -1.3s; }
+    .oh3 { animation-delay: -2.6s; }
+    @keyframes orbitSpin {
+      0%   { transform: rotate(0deg) translateX(55px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(55px) rotate(-360deg); }
+    }
+
+    .emoji-stack { flex-direction: column; gap: 8px; font-size: clamp(1.8rem,5vw,2.8rem); text-align: center; line-height: 1.5; }
+    .emoji-stack.large { font-size: clamp(2rem,5.5vw,3rem); }
+
+    .couple-box { text-align: center; }
+    .couple-emoji { font-size: clamp(2.5rem,7vw,4rem); animation: sway 3s ease-in-out infinite; }
+    .couple-hearts { font-size: 1.2rem; animation: heartbeat 1s ease-in-out infinite; }
+    .couple-stars { font-size: 1rem; margin-top: 4px; }
+    @keyframes sway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+    /* Final page */
+    .final-sheet .recto { background: linear-gradient(160deg,#fff0f6,#f3e8ff); }
+    .final-recto { align-items: center; text-align: center; justify-content: center; }
+    .final-top-deco, .final-bottom-deco { color: var(--lilac); letter-spacing: 10px; font-size: 0.9rem; }
+    .final-hearts-burst { display: flex; gap: 8px; font-size: clamp(1.5rem,4vw,2.2rem); }
+    .final-hearts-burst span { animation: heartbeat 1.2s ease-in-out infinite; }
+    .final-hearts-burst span:nth-child(2) { animation-delay: 0.2s; }
+    .final-hearts-burst span:nth-child(3) { animation-delay: 0.4s; }
+    .final-hearts-burst span:nth-child(4) { animation-delay: 0.6s; }
+    .final-hearts-burst span:nth-child(5) { animation-delay: 0.8s; }
+    .final-chapter-label { font-family: var(--font-display); font-size: clamp(1.5rem,4.5vw,2.8rem); color: var(--rose); }
+    .final-divider { color: var(--pink); letter-spacing: 8px; }
+    .final-message {
+      font-family: var(--font-heading); font-style: italic;
+      font-size: clamp(1rem,3vw,1.4rem); color: var(--deep-rose); line-height: 1.8;
+      border: 1.5px solid var(--pink); border-radius: 12px;
+      padding: 16px 20px; background: rgba(255,255,255,0.6);
+      max-width: 380px; text-align: center;
+    }
+    .final-sub { font-size: clamp(0.78rem,1.8vw,0.9rem); color: var(--text-mid); line-height: 1.7; max-width: 360px; }
+    .final-signature { font-family: var(--font-body); font-size: clamp(0.85rem,2vw,1rem); color: var(--text-mid); line-height: 1.8; }
+    .sig-name { font-family: var(--font-display); font-size: clamp(1.4rem,4vw,2rem); color: var(--rose); }
+    .final-roses { font-size: clamp(1.2rem,3.5vw,1.8rem); }
+
+    .back-cover-face {
+      background: linear-gradient(145deg,#c2185b,#7b1fa2);
+      transform: rotateY(180deg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .back-cover-content { text-align: center; color: #fff; }
+    .back-heart { font-size: 3rem; animation: heartbeat 1.4s ease-in-out infinite; }
+    .back-text { font-family: var(--font-display); font-size: 2.5rem; }
+    .back-text-sub { font-family: var(--font-heading); font-style: italic; font-size: 1rem; opacity: 0.8; }
+
+    /* Nav */
+    .book-nav { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .nav-btn {
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(249,168,212,0.5); border-radius: 30px;
+      padding: 10px 24px; font-family: var(--font-heading);
+      font-size: 1rem; color: #fff; cursor: pointer;
+      transition: all 0.3s var(--ease-smooth);
+    }
+    .nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.3); box-shadow: 0 4px 20px rgba(249,168,212,0.4); transform: translateY(-2px); }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .page-indicator { font-family: var(--font-heading); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.85); min-width: 200px; text-align: center; }
+
+    .close-book-btn {
+      position: fixed; top: 18px; left: 18px; z-index: 600;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.3); border-radius: 30px;
+      padding: 10px 20px; font-family: var(--font-heading);
+      font-size: 0.95rem; color: #fff; cursor: pointer;
+      transition: all 0.3s; opacity: 0; pointer-events: none;
+    }
+    .book-overlay.open .close-book-btn { opacity: 1; pointer-events: all; }
+    .close-book-btn:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+
+    /* Scrollbar */
+    .sheet-face::-webkit-scrollbar { width: 4px; }
+    .sheet-face::-webkit-scrollbar-track { background: transparent; }
+    .sheet-face::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 4px; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .book { height: clamp(340px,75vw,440px); }
+      .book-nav { gap: 10px; }
+      .nav-btn { padding: 8px 16px; font-size: 0.88rem; }
+      .page-indicator { font-size: 0.82rem; min-width: 120px; }
+      .float-deco { display: none; }
+      .glow-orb { display: none; }
+      .sheet-face { padding: 16px; gap: 10px; }
+      .close-book-btn { top: 10px; left: 10px; padding: 8px 14px; font-size: 0.85rem; }
+    }
+    @media (max-width: 380px) {
+      .book { height: 320px; }
+      .main-title { font-size: 4.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+  <div class="glow-orb orb1"></div>
+  <div class="glow-orb orb2"></div>
+  <div class="glow-orb orb3"></div>
+  <div class="noise-overlay"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <button class="music-btn" id="musicBtn" title="Toggle Music">
+    <span class="music-icon">♫</span>
+    <span class="music-label">Music</span>
+  </button>
+
+  <!-- Landing -->
+  <section class="landing" id="landing">
+    <div class="landing-content">
+      <div class="crown-deco">✦ ✦ ✦</div>
+      <h1 class="main-title" id="mainTitle">
+        <span class="title-word">Kitty</span>&nbsp;<span class="title-word">Lilyy</span>
+      </h1>
+      <p class="subtitle">Touch her name to open a story written just for you</p>
+      <div class="heart-pulse-row">
+        <span class="pulse-heart">💗</span>
+        <span class="pulse-heart delay1">💕</span>
+        <span class="pulse-heart delay2">💗</span>
+      </div>
+      <button class="open-book-btn" id="openBookBtn">
+        <span class="btn-inner">Open Our Story ✨</span>
+      </button>
+    </div>
+    <div class="float-deco teddy">🧸</div>
+    <div class="float-deco rose">🌹</div>
+    <div class="float-deco star1">⭐</div>
+    <div class="float-deco cloud">☁️</div>
+    <div class="float-deco rose2">🌸</div>
+    <div class="float-deco star2">✨</div>
+    <div class="float-deco butterfly">🦋</div>
+    <div class="float-deco tulip">🌷</div>
+  </section>
+
+  <!-- Book Overlay -->
+  <div class="book-overlay" id="bookOverlay">
+    <div class="book-scene" id="bookScene">
+      <div class="book" id="book">
+
+        <!-- Front Cover -->
+        <div class="book-cover-wrap front" id="frontCover">
+          <div class="cover-face front-face">
+            <div class="cover-content">
+              <div class="cover-ornament">❧</div>
+              <h2 class="cover-title">Our Love Story</h2>
+              <div class="cover-heart-big">💖</div>
+              <p class="cover-sub">A book written in heartbeats</p>
+              <div class="cover-ornament flip">❧</div>
+            </div>
+          </div>
+          <div class="cover-face back-face"></div>
+        </div>
+
+        <!-- Pages -->
+        <div class="pages-stack">
+
+          <!-- Sheet 1 -->
+          <div class="page-sheet" id="sheet1">
+            <div class="sheet-face recto">
+              <div class="page-ornament">✦</div>
+              <h3 class="page-chapter">Chapter I</h3>
+              <h4 class="page-title">The Beginning of Us</h4>
+              <div class="page-divider">— ♥ —</div>
+              <p class="page-quote">"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</p>
+              <p class="page-body">Before I met you, the stars were just stars — beautiful, distant, indifferent. But the moment you walked into my world, every constellation rearranged itself to spell your name. You became the sky I look up to, the warmth I reach for, the story I never knew I was waiting to live.</p>
+              <p class="page-body">You are not just a person, Kitty Lilyy. You are an entire universe that chose to exist beside mine.</p>
+              <div class="page-deco">🌸</div>
+              <div class="page-num-label">1</div>
+            </div>
+            <div class="sheet-face verso">
+              <div class="page-ornament">✦</div>
+              <div class="verso-illo">
+                <div class="big-heart-wrap">
+                  <div class="big-heart">💕</div>
+                  <div class="orbit-h oh1">💗</div>
+                  <div class="orbit-h oh2">🌹</div>
+                  <div class="orbit-h oh3">💫</div>
+                </div>
+              </div>
+              <p class="page-body">Every love story is beautiful, but ours is my favorite. It has all the right ingredients — laughter, tenderness, trust, and a quiet understanding that speaks louder than any words could.</p>
+              <p class="page-quote">"You are my today and all of my tomorrows."</p>
+              <div class="page-num-label">2</div>
+            </div>
+          </div>
+
+          <!-- Sheet 2 -->
+          <div class="page-sheet" id="sheet2">
+            <div class="sheet-face recto">
+              <div class="page-ornament">✦</div>
+              <h3 class="page-chapter">Chapter II</h3>
+              <h4 class="page-title">The Warmth You Carry</h4>
+              <div class="page-divider">— ♥ —</div>
+              <p class="page-quote">"I love you not only for what you are, but for what I am when I am with you."</p>
+              <p class="page-body">There is a particular kind of magic in the way you laugh — full, unguarded, completely yours. It sounds like spring arriving after a long winter. It sounds like every good thing in the world happening all at once. And when you laugh, I remember exactly why I chose you.</p>
+              <p class="page-body">You have this gentle strength — the kind that doesn't announce itself, doesn't need applause. It simply exists, steady and warm, like the sun on a quiet morning.</p>
+              <div class="page-deco">🌷</div>
+              <div class="page-num-label">3</div>
+            </div>
+            <div class="sheet-face verso">
+              <div class="page-ornament">✦</div>
+              <div class="verso-illo emoji-stack">
+                <span>🌹</span><span>💌</span><span>🕊️</span>
+              </div>
+              <p class="page-body">Loving you is the easiest thing I have ever done. It requires no effort, no performance, no pretense. It is as natural as breathing — as necessary too. A life without loving you would be a life holding its breath.</p>
+              <p class="page-quote">"My heart is, and always will be, yours."</p>
+              <div class="page-num-label">4</div>
+            </div>
+          </div>
+
+          <!-- Sheet 3 -->
+          <div class="page-sheet" id="sheet3">
+            <div class="sheet-face recto">
+              <div class="page-ornament">✦</div>
+              <h3 class="page-chapter">Chapter III</h3>
+              <h4 class="page-title">Small Moments, Endless Love</h4>
+              <div class="page-divider">— ♥ —</div>
+              <p class="page-quote">"I fell in love with you the way you fall asleep — slowly, then all at once."</p>
+              <p class="page-body">It isn't the grand gestures I think about when I think of us. It's the small things — the way you scrunch your nose when something surprises you, the way you reach for my hand without thinking, the way you say goodnight like it matters.</p>
+              <p class="page-body">These tiny, perfect moments are the architecture of our love. Each one a brick, each one irreplaceable, each one holding the whole of us together.</p>
+              <div class="page-deco">🌼</div>
+              <div class="page-num-label">5</div>
+            </div>
+            <div class="sheet-face verso">
+              <div class="page-ornament">✦</div>
+              <div class="verso-illo emoji-stack large">
+                <span>🌙</span>
+                <span>⭐ ✨ ⭐</span>
+                <span>🧸</span>
+              </div>
+              <p class="page-body">You make ordinary days feel like gifts. You make rainy afternoons feel like poetry. You make the whole world — even the difficult parts — feel like somewhere worth being, because you are in it.</p>
+              <p class="page-quote">"In your smile, I see something more beautiful than the stars."</p>
+              <div class="page-num-label">6</div>
+            </div>
+          </div>
+
+          <!-- Sheet 4 -->
+          <div class="page-sheet" id="sheet4">
+            <div class="sheet-face recto">
+              <div class="page-ornament">✦</div>
+              <h3 class="page-chapter">Chapter IV</h3>
+              <h4 class="page-title">Forever &amp; Always</h4>
+              <div class="page-divider">— ♥ —</div>
+              <p class="page-quote">"I would rather spend one lifetime with you, than face all the ages of this world alone."</p>
+              <p class="page-body">Forever is a word that used to feel overwhelming — too vast, too unknowable. But with you, forever feels like exactly the right amount of time. Not a day more, not a day less. Just forever, together, discovering all the versions of us yet to come.</p>
+              <p class="page-body">I want to know you in every season — your spring hopes and winter stillness, your autumn reflections and summer joy. I want to love every chapter of you.</p>
+              <div class="page-deco">🌺</div>
+              <div class="page-num-label">7</div>
+            </div>
+            <div class="sheet-face verso">
+              <div class="page-ornament">✦</div>
+              <div class="verso-illo">
+                <div class="couple-box">
+                  <div class="couple-emoji">👫</div>
+                  <div class="couple-hearts">💕 💕 💕</div>
+                  <div class="couple-stars">⭐ ✨ ⭐</div>
+                </div>
+              </div>
+              <p class="page-body">Loyalty isn't something I give you because I have to. I give it because you have shown me what it means to be someone's safe place. And I want to be that for you — always. Your constant. Your home. Your person.</p>
+              <p class="page-quote">"You are my compass, my north, my whole direction."</p>
+              <div class="page-num-label">8</div>
+            </div>
+          </div>
+
+          <!-- Sheet 5 — Final -->
+          <div class="page-sheet final-sheet" id="sheet5">
+            <div class="sheet-face recto final-recto">
+              <div class="final-top-deco">✦ ✦ ✦</div>
+              <div class="final-hearts-burst">
+                <span>💖</span><span>💗</span><span>💕</span><span>❤️</span><span>💝</span>
+              </div>
+              <h3 class="final-chapter-label">The Last Page</h3>
+              <div class="final-divider">— ♥ —</div>
+              <p class="final-message">"You are my favorite chapter<br/>in this life story ❤️"</p>
+              <p class="final-sub">Every word I've written here is true. Every feeling is real. Every promise is kept — not because I said it, but because you are worth keeping every single one.</p>
+              <p class="final-signature">With all my love, forever and always,<br/><em class="sig-name">Yours ✨</em></p>
+              <div class="final-roses">🌹 🌹 🌹</div>
+              <div class="final-bottom-deco">✦ ✦ ✦</div>
+              <div class="page-num-label">∞</div>
+            </div>
+            <div class="sheet-face verso back-cover-face">
+              <div class="back-cover-content">
+                <div class="back-heart">💖</div>
+                <p class="back-text">The End</p>
+                <p class="back-text-sub">…and a new beginning</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /pages-stack -->
+
+        <div class="book-cover-wrap back" id="backCover">
+          <div class="cover-face back-face-plain"></div>
+        </div>
+
+      </div><!-- /book -->
+
+      <div class="book-nav">
+        <button class="nav-btn" id="prevBtn" disabled>‹ Prev</button>
+        <div class="page-indicator" id="pageIndicator">Open the cover to begin</div>
+        <button class="nav-btn" id="nextBtn">Next ›</button>
+      </div>
+
+    </div><!-- /book-scene -->
+    <button class="close-book-btn" id="closeBookBtn">✕ Close</button>
+  </div>
+
+  <script>
+    /* ============ PARTICLE SYSTEM ============ */
+    const canvas = document.getElementById('particleCanvas');
+    const ctx    = canvas.getContext('2d');
+    let particles = [];
+    let W = canvas.width  = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    const EMOJIS = ['💗','💕','✨','🌸','⭐','💫','🌹','💖','❤️','🦋'];
+
+    class Particle {
+      constructor(x, y, click = false) {
+        this.x = x ?? Math.random() * W;
+        this.y = y ?? Math.random() * H;
+        this.emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+        this.size  = click ? 14 + Math.random() * 18 : 10 + Math.random() * 14;
+        this.vx    = (Math.random() - 0.5) * (click ? 4 : 1.2);
+        this.vy    = click ? -2 - Math.random() * 4 : -0.4 - Math.random() * 0.8;
+        this.life  = 1;
+        this.decay = click ? 0.018 + Math.random() * 0.012 : 0.004 + Math.random() * 0.003;
+        this.rot   = Math.random() * Math.PI * 2;
+        this.rs    = (Math.random() - 0.5) * 0.05;
+      }
+      update() { this.x += this.vx; this.y += this.vy; this.vy -= 0.015; this.life -= this.decay; this.rot += this.rs; }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.life);
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.font = `${this.size}px serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(this.emoji, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    let ambTick = 0;
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      if (ambTick++ % 25 === 0) particles.push(new Particle(Math.random() * W, H + 20));
+      particles = particles.filter(p => p.life > 0);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    function burst(x, y, n = 12) {
+      for (let i = 0; i < n; i++) particles.push(new Particle(x, y, true));
+    }
+
+    document.addEventListener('click', e => {
+      if (!document.getElementById('bookOverlay').classList.contains('open')) burst(e.clientX, e.clientY, 10);
+    });
+    document.addEventListener('touchstart', e => {
+      if (!document.getElementById('bookOverlay').classList.contains('open')) burst(e.touches[0].clientX, e.touches[0].clientY, 10);
+    }, { passive: true });
+
+    /* ============ BOOK ENGINE ============ */
+    const overlay    = document.getElementById('bookOverlay');
+    const openBtn    = document.getElementById('openBookBtn');
+    const closeBtn   = document.getElementById('closeBookBtn');
+    const mainTitle  = document.getElementById('mainTitle');
+    const frontCover = document.getElementById('frontCover');
+    const prevBtn    = document.getElementById('prevBtn');
+    const nextBtn    = document.getElementById('nextBtn');
+    const indicator  = document.getElementById('pageIndicator');
+    const sheets     = Array.from(document.querySelectorAll('.page-sheet'));
+    const TOTAL      = sheets.length;
+
+    let cur = -1, busy = false;
+
+    const LABELS = [
+      'Open the cover to begin',
+      'Pages 1 – 2', 'Pages 3 – 4', 'Pages 5 – 6', 'Pages 7 – 8',
+      'The Final Chapter ❤️'
+    ];
+
+    function setZ() {
+      frontCover.style.zIndex = cur === -1 ? 10 : 1;
+      sheets.forEach((s, i) => { s.style.zIndex = i < cur ? i + 1 : TOTAL - i + 2; });
+    }
+
+    function updateNav() {
+      prevBtn.disabled = cur < 0;
+      nextBtn.disabled = cur >= TOTAL;
+      indicator.textContent = LABELS[cur + 1] ?? LABELS[LABELS.length - 1];
+    }
+
+    function openCover() {
+      if (busy || cur >= 0) return; busy = true;
+      frontCover.classList.add('open-cover');
+      cur = 0; setZ(); updateNav();
+      setTimeout(() => { busy = false; }, 1100);
+    }
+
+    function closeCover() {
+      if (busy || cur !== 0) return; busy = true;
+      frontCover.classList.remove('open-cover');
+      cur = -1; setZ(); updateNav();
+      setTimeout(() => { busy = false; }, 1100);
+    }
+
+    function next() {
+      if (busy || cur >= TOTAL) return;
+      if (cur === -1) { openCover(); return; }
+      busy = true;
+      sheets[cur].classList.add('flipped');
+      cur++; setZ(); updateNav();
+      setTimeout(() => { busy = false; }, 1050);
+    }
+
+    function prev() {
+      if (busy || cur <= -1) return;
+      if (cur === 0) { closeCover(); return; }
+      busy = true;
+      sheets[cur - 1].classList.remove('flipped');
+      cur--; setZ(); updateNav();
+      setTimeout(() => { busy = false; }, 1050);
+    }
+
+    function openBook() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      burst(W / 2, H / 2, 20);
+      cur = -1;
+      sheets.forEach(s => s.classList.remove('flipped'));
+      frontCover.classList.remove('open-cover');
+      setZ(); updateNav();
+      setTimeout(openCover, 400);
+    }
+
+    function closeBook() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    openBtn.addEventListener('click', openBook);
+    mainTitle.addEventListener('click', openBook);
+    closeBtn.addEventListener('click', closeBook);
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeBook(); });
+
+    document.addEventListener('keydown', e => {
+      if (!overlay.classList.contains('open')) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
+      if (e.key === 'Escape') closeBook();
+    });
+
+    let tStartX = 0;
+    const scene = document.getElementById('bookScene');
+    scene.addEventListener('touchstart', e => { tStartX = e.touches[0].clientX; }, { passive: true });
+    scene.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - tStartX;
+      if (Math.abs(dx) < 40) return;
+      dx < 0 ? next() : prev();
+    }, { passive: true });
+    scene.addEventListener('click', e => e.stopPropagation());
+
+    setZ(); updateNav();
+
+    /* ============ TITLE SPARKLE ============ */
+    mainTitle.addEventListener('mousemove', e => { if (Math.random() < 0.25) burst(e.clientX, e.clientY, 3); });
+    mainTitle.addEventListener('touchmove', e => { burst(e.touches[0].clientX, e.touches[0].clientY, 4); }, { passive: true });
+
+    /* ============ WEB AUDIO MUSIC ============ */
+    let audioCtx = null, musicNodes = [], musicOn = false;
+    const musicBtn = document.getElementById('musicBtn');
+
+    function startMusic() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const master = audioCtx.createGain();
+      master.gain.setValueAtTime(0, audioCtx.currentTime);
+      master.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 2);
+      master.connect(audioCtx.destination);
+
+      const delay = audioCtx.createDelay(2);
+      delay.delayTime.value = 0.25;
+      const fb = audioCtx.createGain(); fb.gain.value = 0.35;
+      delay.connect(fb); fb.connect(delay); delay.connect(master);
+
+      const notes = [
+        { f: 261.63, t: 0 }, { f: 329.63, t: 0.5 }, { f: 392.00, t: 1.0 }, { f: 523.25, t: 1.5 },
+        { f: 659.25, t: 2.0 }, { f: 523.25, t: 2.5 }, { f: 392.00, t: 3.0 }, { f: 329.63, t: 3.5 }
+      ];
+
+      [130.81, 164.81, 196.00].forEach(f => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = f; g.gain.value = 0.04;
+        o.connect(g); g.connect(master); o.start();
+        musicNodes.push(o);
+      });
+
+      let ls = audioCtx.currentTime;
+      function sched() {
+        if (!musicOn) return;
+        notes.forEach(({ f, t }) => {
+          const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+          o.type = 'sine'; o.frequency.value = f;
+          const s = ls + t, d = 0.4;
+          g.gain.setValueAtTime(0, s);
+          g.gain.linearRampToValueAtTime(0.3, s + 0.04);
+          g.gain.exponentialRampToValueAtTime(0.001, s + d);
+          o.connect(g); g.connect(delay); g.connect(master);
+          o.start(s); o.stop(s + d + 0.1);
+          musicNodes.push(o);
+        });
+        ls += 4.0;
+        setTimeout(sched, 3800);
+      }
+      sched();
+    }
+
+    function stopMusic() {
+      if (!audioCtx) return;
+      musicNodes.forEach(n => { try { n.stop(); } catch(e) {} });
+      musicNodes = [];
+      audioCtx.close();
+      audioCtx = null;
+    }
+
+    musicBtn.addEventListener('click', () => {
+      musicOn = !musicOn;
+      if (musicOn) {
+        startMusic();
+        musicBtn.classList.add('playing');
+        musicBtn.querySelector('.music-label').textContent = 'Pause';
+      } else {
+        stopMusic();
+        musicBtn.classList.remove('playing');
+        musicBtn.querySelector('.music-label').textContent = 'Music';
+      }
+    });
+  </script>
+</body>
+</html>
